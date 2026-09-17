@@ -6,6 +6,7 @@ package com.mycompany.registrationandlogin;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.Scanner;
 
 /**
  *
@@ -13,11 +14,12 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class LoginTest {
     
-    public LoginTest() {
-    }
+    public static void main(String[] args) {
 
-    @org.junit.jupiter.api.Test
-    public void testSomeMethod() {
-    }
-    
-}
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("===== REGISTRATION =====");
+
+        System.out.print("Enter your first name: ");
+        String firstName = input.nextLine();
+
