@@ -14,11 +14,11 @@ public class LoginTest {
     public void testCheckUserNameCorrect() {
 
         Login user = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
-                "Ch&8cse@ke99",
-                "+27838968976"
+                "Mpho",
+                "Magwede",
+                "Mpho_1",
+                "Mp@h$o123",
+                "+27660610523"
         );
 
         assertTrue(user.checkUserName());
@@ -29,11 +29,11 @@ public class LoginTest {
     public void testCheckUserNameIncorrect() {
 
         Login user = new Login(
-                "Kyle",
+                "Mpho",
                 "Smith",
-                "kyle!!!!!!!",
-                "Ch&8cse@ke99",
-                "+27838968976"
+                "Mpho!!!!!!!",
+                "Mp@h$o123",
+                "+27660610523"
         );
 
         assertFalse(user.checkUserName());
@@ -44,11 +44,11 @@ public class LoginTest {
     public void testPasswordComplexityCorrect() {
 
         Login user = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
-                "Ch&8cse@ke99",
-                "+27838968976"
+                "Mpho",
+                "Magwede",
+                "Mpho_1",
+                "Mp@h$o123",
+                "+27660610523"
         );
 
         assertTrue(user.checkPasswordComplexity());
@@ -59,11 +59,11 @@ public class LoginTest {
     public void testPasswordComplexityIncorrect() {
 
         Login user = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
+                "Mpho",
+                "Magwede",
+                "Mpho_1",
                 "password",
-                "+27838968976"
+                "+27660610523"
         );
 
         assertFalse(user.checkPasswordComplexity());
@@ -74,11 +74,11 @@ public class LoginTest {
     public void testCellPhoneCorrect() {
 
         Login user = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
-                "Ch&8cse@ke99",
-                "+27838968976"
+                "Mpho",
+                "Magwede",
+                "Mpho_1",
+                "Mp@h$o123",
+                "+27660610523"
         );
 
         assertTrue(user.checkCellPhoneNumber());
@@ -89,11 +89,11 @@ public class LoginTest {
     public void testCellPhoneIncorrect() {
 
         Login user = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
-                "Ch&8cse@ke99",
-                "08966553"
+                "Mpho",
+                "Magwede",
+                "Mpho_1",
+                "Mp@h$o123",
+                "0660610523"
         );
 
         assertFalse(user.checkCellPhoneNumber());
@@ -104,11 +104,11 @@ public class LoginTest {
     public void testLoginSuccessful() {
 
         Login user = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
-                "Ch&8cse@ke99",
-                "+27838968976"
+                "Mpho",
+                "Magwede",
+                "Mpho_1",
+                "Mp@h$o123",
+                "+27660610523"
         );
 
         assertTrue(
@@ -121,11 +121,11 @@ public class LoginTest {
     public void testLoginFailed() {
 
         Login user = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
-                "Ch&8cse@ke99",
-                "+27838968976"
+                "Mpho",
+                "Magwede",
+                "Mpho_1",
+                "Mp@h$o123",
+                "+27660610523"
         );
 
         assertFalse(
@@ -138,11 +138,11 @@ public class LoginTest {
     public void testRegisterUser() {
 
         Login user = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
-                "Ch&8cse@ke99",
-                "+27838968976"
+                "Mpho",
+                "Magwede",
+                "Mpho_1",
+                "Mp@h$o123",
+                "+27660610523"
         );
 
         assertEquals(
@@ -156,11 +156,11 @@ public class LoginTest {
     public void testReturnLoginStatusSuccessful() {
 
         Login user = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
-                "Ch&8cse@ke99",
-                "+27838968976"
+                "Mpho",
+                "Magwede",
+                "Mpho_1",
+                "Mp@h$o123",
+                "+27660610523"
         );
 
         assertEquals(
@@ -174,11 +174,11 @@ public class LoginTest {
     public void testReturnLoginStatusFailed() {
 
         Login user = new Login(
-                "Kyle",
-                "Smith",
-                "kyl_1",
-                "Ch&8cse@ke99",
-                "+27838968976"
+                "Mpho",
+                "Magwede",
+                "Mpho_1",
+                "Mp@h$o123",
+                "+27660610523"
         );
 
         assertEquals(

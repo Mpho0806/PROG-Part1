@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.registrationandlogin;
+
 import java.util.Scanner;
 
 public class Login {
@@ -67,7 +68,7 @@ public class Login {
         input.close();
     }
 
-    public boolean checkCellPhoneNumber() {
+public boolean checkCellPhoneNumber() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
