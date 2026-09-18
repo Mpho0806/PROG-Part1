@@ -6,6 +6,9 @@ package com.mycompany.registrationandlogin;
 import java.util.Scanner;
 
 public class Login {
+
+    public Login(String firstName, String lastName, String username, String password, String cellPhone) {
+    }
     
 
     public static void main(String[]args) {
@@ -62,6 +65,30 @@ public class Login {
         }
 
         input.close();
+    }
+
+    public boolean checkCellPhoneNumber() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    boolean checkPasswordComplexity() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    boolean checkUserName() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    boolean registerUser() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    boolean loginUser(String loginUsername, String loginPassword) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public boolean returnLoginStatus(boolean loginSuccessful) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
     

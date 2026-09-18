@@ -6,11 +6,11 @@ package com.mycompany.registrationandlogin;
 
 public class RegistrationAndLogIn {
 
-   private String username;
-   private String password;
-   private String cellPhone;
-   private String firstName;
-   private String lastName;
+   private final String username;
+   private final String password;
+   private final String cellPhone;
+   private final String firstName;
+   private final String lastName;
    
     // Constructor
     public RegistrationAndLogIn(String firstName, String lastName, String username,
