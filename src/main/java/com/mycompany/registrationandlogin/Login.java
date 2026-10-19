@@ -4,7 +4,6 @@
  */
 package com.mycompany.registrationandlogin;
 
-import java.util.Scanner;
 
 public class Login {
 
