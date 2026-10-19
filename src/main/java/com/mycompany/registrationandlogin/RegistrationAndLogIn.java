@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.registrationandlogin;
 
 import java.util.Scanner;
@@ -11,6 +7,7 @@ public class RegistrationAndLogIn {
     public static void main(String[] args) {
         try (Scanner input = new Scanner(System.in)) {
 
+            // ===== PART 1: REGISTRATION =====
             System.out.println("===== REGISTRATION =====");
 
             System.out.print("Enter your first name: ");
@@ -33,45 +30,49 @@ public class RegistrationAndLogIn {
             System.out.println();
             System.out.println(user.registerUser());
 
-            if (user.checkUserName()
+            if (!(user.checkUserName()
                     && user.checkPasswordComplexity()
-                    && user.checkCellPhoneNumber()) {
+                    && user.checkCellPhoneNumber())) {
+                return;
+            }
 
-                System.out.println();
-                System.out.println("===== LOGIN =====");
+            // ===== LOGIN =====
+            System.out.println();
+            System.out.println("===== LOGIN =====");
 
-                System.out.print("Enter your username: ");
-                String loginUsername = input.nextLine();
+            System.out.print("Enter your username: ");
+            String loginUsername = input.nextLine();
 
-                System.out.print("Enter your password: ");
-                String loginPassword = input.nextLine();
+            System.out.print("Enter your password: ");
+            String loginPassword = input.nextLine();
 
-                boolean loginSuccessful = user.loginUser(loginUsername, loginPassword);
-                System.out.println(user.returnLoginStatus(loginSuccessful));
+            boolean loginSuccessful = user.loginUser(loginUsername, loginPassword);
+            System.out.println(user.returnLoginStatus(loginSuccessful));
+
+            // Messages can only be sent after a successful login
+            if (loginSuccessful) {
+                runQuickChat(input);
             }
         }
     }
-}
 
-        //Part 2
+    // ===== PART 2: QUICKCHAT =====
+    private static void runQuickChat(Scanner input) {
+        System.out.println();
+        System.out.println("Welcome to QuickChat.");
 
-private static void runQuickChat(scannerinput) {
-    System.out.println();
-    System.out.println("Welcome to QuickChat.");
-    Scanner input = null;
-    
-     int maxMessages = readInt(input, "How many messages do you wish to enter? ", 1);
+        int maxMessages = readInt(input, "How many messages do you wish to enter? ", 1);
         int entered = 0;
         boolean running = true;
- 
+
         while (running) {
             System.out.println();
             System.out.println("1) Send Messages");
             System.out.println("2) Show recently sent messages");
             System.out.println("3) Quit");
- 
+
             int choice = readInt(input, "Choose an option: ", 1);
- 
+
             switch (choice) {
                 case 1:
                     if (entered >= maxMessages) {
@@ -92,11 +93,11 @@ private static void runQuickChat(scannerinput) {
                     System.out.println("Invalid option, please choose 1, 2 or 3.");
             }
         }
- 
+
         System.out.println();
         System.out.println("Total messages sent: " + Message.returnTotalMessages());
     }
- 
+
     private static void sendOneMessage(Scanner input, int messageNumber) {
         // Recipient: keep asking until it is valid
         String recipient;
@@ -110,7 +111,8 @@ private static void runQuickChat(scannerinput) {
                 break;
             }
         }
- 
+
+        // Message text: keep asking until it is 250 characters or fewer
         Message message;
         while (true) {
             System.out.print("Enter your message (max 250 characters): ");
@@ -126,16 +128,16 @@ private static void runQuickChat(scannerinput) {
                 break;
             }
         }
- 
+
         System.out.println("Message ID generated: " + message.getMessageId());
- 
+
         System.out.println("1) Send Message");
         System.out.println("2) Disregard Message");
         System.out.println("3) Store Message to send later");
         int option = readInt(input, "Choose an option: ", 1);
- 
+
         System.out.println(message.sentMessage(option));
- 
+
         if (option == 2) {
             input.nextLine(); // user presses 0 to delete the message
         }
@@ -144,7 +146,7 @@ private static void runQuickChat(scannerinput) {
             System.out.println(message.details());
         }
     }
- 
+
     private static int readInt(Scanner input, String prompt, int min) {
         while (true) {
             System.out.print(prompt);

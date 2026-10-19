@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.registrationandlogin;
-
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +6,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-
 
 public class Message {
 
@@ -164,10 +158,4 @@ public class Message {
     public static void setStorageFile(Path path) {
         storageFile = path;
     }
-}
-
-    public Message(int messageNumber, String recipient, String text) {
-        
-    
-    
 }
