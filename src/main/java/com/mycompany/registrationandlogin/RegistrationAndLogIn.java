@@ -4,94 +4,51 @@
 
 package com.mycompany.registrationandlogin;
 
+import java.util.Scanner;
+
 public class RegistrationAndLogIn {
 
-   private final String username;
-   private final String password;
-   private final String cellPhone;
-   private final String firstName;
-   private final String lastName;
-   
-    // Constructor
-    public RegistrationAndLogIn(String firstName, String lastName, String username,
-                 String password, String cellPhone) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.cellPhone = cellPhone;
-    }
+    public static void main(String[] args) {
+        try (Scanner input = new Scanner(System.in)) {
 
-    // Checks if username contains an underscore and is no more than 5 characters
-    public boolean checkUserName() {
-        return username.contains("_") && username.length() <= 5;
-    }
+            System.out.println("===== REGISTRATION =====");
 
-    // Checks password complexity
-    public boolean checkPasswordComplexity() {
-        if (password.length() < 8) {
-            return false;
-        }
+            System.out.print("Enter your first name: ");
+            String firstName = input.nextLine();
 
-        boolean hasCapital = false;
-        boolean hasNumber = false;
-        boolean hasSpecial = false;
+            System.out.print("Enter your last name: ");
+            String lastName = input.nextLine();
 
-        for (char c : password.toCharArray()) {
+            System.out.print("Enter your username: ");
+            String username = input.nextLine();
 
-            if (Character.isUpperCase(c)) {
-                hasCapital = true;
-            }
+            System.out.print("Enter your password: ");
+            String password = input.nextLine();
 
-            if (Character.isDigit(c)) {
-                hasNumber = true;
-            }
+            System.out.print("Enter your South African cell phone number (e.g. +27831234567): ");
+            String cellPhone = input.nextLine();
 
-            if (!Character.isLetterOrDigit(c)) {
-                hasSpecial = true;
+            Login user = new Login(firstName, lastName, username, password, cellPhone);
+
+            System.out.println();
+            System.out.println(user.registerUser());
+
+            if (user.checkUserName()
+                    && user.checkPasswordComplexity()
+                    && user.checkCellPhoneNumber()) {
+
+                System.out.println();
+                System.out.println("===== LOGIN =====");
+
+                System.out.print("Enter your username: ");
+                String loginUsername = input.nextLine();
+
+                System.out.print("Enter your password: ");
+                String loginPassword = input.nextLine();
+
+                boolean loginSuccessful = user.loginUser(loginUsername, loginPassword);
+                System.out.println(user.returnLoginStatus(loginSuccessful));
             }
         }
-
-        return hasCapital && hasNumber && hasSpecial;
-    }
-
-    // Checks whether the South African cell phone number is correctly formatted
-    public boolean checkCellPhoneNumber() {
-        return cellPhone.matches("^\\+27\\d{9}$");
-    }
-
-    // Registers the user and returns the appropriate message
-    public String registerUser() {
-
-        if (!checkUserName()) {
-            return "Username is not correctly formatted, please ensure that your username contains an underscore and is no more than five characters in length.";
-        }
-
-        if (!checkPasswordComplexity()) {
-            return "Password is not correctly formatted, please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
-        }
-
-        if (!checkCellPhoneNumber()) {
-            return "Cell number is incorrectly formatted or does not contain an international code; please correct the number and try again.";
-        }
-
-        return "Username and password successfully captured.";
-    }
-
-    // Verifies the login details
-    public boolean loginUser(String enteredUsername, String enteredPassword) {
-        return enteredUsername.equals(username)
-                && enteredPassword.equals(password);
-    }
-
-    // Returns the login status message
-    public String returnLoginStatus(boolean loginSuccessful) {
-
-        if (loginSuccessful) {
-            return "Welcome " + firstName + " " + lastName
-                    + ", it is great to see you again.";
-        }
-
-        return "Username or password incorrect, please try again.";
     }
 }

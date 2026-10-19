@@ -14,10 +14,10 @@ public class LoginTest {
     public void testCheckUserNameCorrect() {
 
         Login user = new Login(
-                "Mpho",
-                "Magwede",
-                "Mpho_1",
-                "Mp@h$o123",
+                "Kyle",
+                "Smith",
+                "kyl_1",
+                "Ch&8cse@ke99",
                 "+27660610523"
         );
 
@@ -29,10 +29,10 @@ public class LoginTest {
     public void testCheckUserNameIncorrect() {
 
         Login user = new Login(
-                "Mpho",
+                "Kyle",
                 "Smith",
-                "Mpho!!!!!!!",
-                "Mp@h$o123",
+                "Kyle!!!!!!!",
+                "Ch&8cse@ke99",
                 "+27660610523"
         );
 
@@ -44,10 +44,10 @@ public class LoginTest {
     public void testPasswordComplexityCorrect() {
 
         Login user = new Login(
-                "Mpho",
-                "Magwede",
-                "Mpho_1",
-                "Mp@h$o123",
+                "Kyle",
+                "Smith",
+                "kyl_1",
+                "Ch&8cse@ke99",
                 "+27660610523"
         );
 
@@ -59,9 +59,9 @@ public class LoginTest {
     public void testPasswordComplexityIncorrect() {
 
         Login user = new Login(
-                "Mpho",
-                "Magwede",
-                "Mpho_1",
+                "Kyle",
+                "Smith",
+                "kyl_1",
                 "password",
                 "+27660610523"
         );
@@ -74,10 +74,10 @@ public class LoginTest {
     public void testCellPhoneCorrect() {
 
         Login user = new Login(
-                "Mpho",
-                "Magwede",
-                "Mpho_1",
-                "Mp@h$o123",
+                "Kyle",
+                "Smith",
+                "kyl_1",
+                "Ch&8cse@ke99",
                 "+27660610523"
         );
 
@@ -89,10 +89,10 @@ public class LoginTest {
     public void testCellPhoneIncorrect() {
 
         Login user = new Login(
-                "Mpho",
-                "Magwede",
-                "Mpho_1",
-                "Mp@h$o123",
+                "Kyle",
+                "Smith",
+                "kyl_1",
+                "Ch&8cse@ke99",
                 "0660610523"
         );
 
@@ -104,10 +104,10 @@ public class LoginTest {
     public void testLoginSuccessful() {
 
         Login user = new Login(
-                "Mpho",
-                "Magwede",
-                "Mpho_1",
-                "Mp@h$o123",
+                "Kyle",
+                "Smith",
+                "kyl_1",
+                "Ch&8cse@ke99",
                 "+27660610523"
         );
 
@@ -121,10 +121,10 @@ public class LoginTest {
     public void testLoginFailed() {
 
         Login user = new Login(
-                "Mpho",
-                "Magwede",
-                "Mpho_1",
-                "Mp@h$o123",
+                "Kyle",
+                "Smith",
+                "kyl_1",
+                "Ch&8cse@ke99",
                 "+27660610523"
         );
 
@@ -138,10 +138,10 @@ public class LoginTest {
     public void testRegisterUser() {
 
         Login user = new Login(
-                "Mpho",
-                "Magwede",
-                "Mpho_1",
-                "Mp@h$o123",
+                "Kyle",
+                "Smith",
+                "kyl_1",
+                "Ch&8cse@ke99",
                 "+27660610523"
         );
 
@@ -156,10 +156,10 @@ public class LoginTest {
     public void testReturnLoginStatusSuccessful() {
 
         Login user = new Login(
-                "Mpho",
-                "Magwede",
-                "Mpho_1",
-                "Mp@h$o123",
+                "Kyle",
+                "Smith",
+                "kyl_1",
+                "Ch&8cse@ke99",
                 "+27660610523"
         );
 
@@ -174,10 +174,10 @@ public class LoginTest {
     public void testReturnLoginStatusFailed() {
 
         Login user = new Login(
-                "Mpho",
-                "Magwede",
-                "Mpho_1",
-                "Mp@h$o123",
+                "Kyle",
+                "Smith",
+                "kyl_1",
+                "Ch&8cse@ke99",
                 "+27660610523"
         );
 
@@ -187,4 +187,3 @@ public class LoginTest {
         );
     }
 }
-

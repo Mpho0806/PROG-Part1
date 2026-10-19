@@ -8,89 +8,84 @@ import java.util.Scanner;
 
 public class Login {
 
-    public Login(String firstName, String lastName, String username, String password, String cellPhone) {
+   
+    private final String firstName;
+    private final String lastName;
+    private final String username;
+    private final String password;
+    private final String cellPhone;
+
+    public Login(String firstName, String lastName, String username,
+                 String password, String cellPhone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.cellPhone = cellPhone;
     }
-    
 
-    public static void main(String[]args) {
-        
-          Scanner input = new Scanner(System.in);
+    // Username must contain an underscore and be no more than 5 characters
+    public boolean checkUserName() {
+        return username != null
+                && username.contains("_")
+                && username.length() <= 5;
+    }
 
-        System.out.println("===== REGISTRATION =====");
-
-        System.out.print("Enter your first name: ");
-        String firstName = input.nextLine();
-
-        System.out.print("Enter your last name: ");
-        String lastName = input.nextLine();
-
-        System.out.print("Enter your username: ");
-        String username = input.nextLine();
-
-        System.out.print("Enter your password: ");
-        String password = input.nextLine();
-
-        System.out.print("Enter your South African cell phone number: ");
-        String cellPhone = input.nextLine();
-
-        Login user = new Login(
-                firstName,
-                lastName,
-                username,
-                password,
-                cellPhone
-        );
-
-        System.out.println();
-        System.out.println(user.registerUser());
-
-        if (user.checkUserName()
-                && user.checkPasswordComplexity()
-                && user.checkCellPhoneNumber()) {
-
-            System.out.println();
-            System.out.println("===== LOGIN =====");
-
-            System.out.print("Enter your username: ");
-            String loginUsername = input.nextLine();
-
-            System.out.print("Enter your password: ");
-            String loginPassword = input.nextLine();
-
-            boolean loginSuccessful =
-                    user.loginUser(loginUsername, loginPassword);
-
-            System.out.println(
-                    user.returnLoginStatus(loginSuccessful)
-            );
+    // Password: at least 8 characters, a capital letter, a number and a special character
+    public boolean checkPasswordComplexity() {
+        if (password == null || password.length() < 8) {
+            return false;
         }
 
-        input.close();
+        boolean hasCapital = false;
+        boolean hasNumber = false;
+        boolean hasSpecial = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                hasCapital = true;
+            } else if (Character.isDigit(c)) {
+                hasNumber = true;
+            } else if (!Character.isLetterOrDigit(c)) {
+                hasSpecial = true;
+            }
+        }
+
+        return hasCapital && hasNumber && hasSpecial;
     }
 
-    boolean returnLoginStatus(boolean loginSuccessful) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    // South African number with international code: +27 followed by 9 digits
+    public boolean checkCellPhoneNumber() {
+        return cellPhone != null && cellPhone.matches("^\\+27\\d{9}$");
     }
 
-    boolean loginUser(String kyl_1, String ch8cseke99) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String registerUser() {
+        if (!checkUserName()) {
+            return "Username is not correctly formatted, please ensure that your username contains an underscore and is no more than five characters in length.";
+        }
+
+        if (!checkPasswordComplexity()) {
+            return "Password is not correctly formatted, please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
+        }
+
+        if (!checkCellPhoneNumber()) {
+            return "Cell number is incorrectly formatted or does not contain an international code; please correct the number and try again.";
+        }
+
+        return "Username and password successfully captured.";
     }
 
-    
-    Object registerUser() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean loginUser(String enteredUsername, String enteredPassword) {
+        return username.equals(enteredUsername)
+                && password.equals(enteredPassword);
     }
 
-    boolean checkPasswordComplexity() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public String returnLoginStatus(boolean loginSuccessful) {
+        if (loginSuccessful) {
+            return "Welcome " + firstName + " " + lastName
+                    + ", it is great to see you again.";
+        }
 
-    private boolean checkUserName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "Username or password incorrect, please try again.";
     }
-
-    private boolean checkCellPhoneNumber() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }
