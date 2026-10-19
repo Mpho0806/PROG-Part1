@@ -58,6 +58,7 @@ public class RegistrationAndLogIn {
 private static void runQuickChat(scannerinput) {
     System.out.println();
     System.out.println("Welcome to QuickChat.");
+    Scanner input = null;
     
      int maxMessages = readInt(input, "How many messages do you wish to enter? ", 1);
         int entered = 0;
@@ -158,4 +159,4 @@ private static void runQuickChat(scannerinput) {
             System.out.println("Please enter a valid number.");
         }
     }
- 
+}
