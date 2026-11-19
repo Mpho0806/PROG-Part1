@@ -226,6 +226,9 @@ public class Message {
         sentMessages.clear();
         storedMessages.clear();
         totalSent = 0;
+        disregardedMessages.clear();
+        messageHashes.clear();
+        messageIds.clear();
     }
 
     public static void setStorageFile(Path path) {
