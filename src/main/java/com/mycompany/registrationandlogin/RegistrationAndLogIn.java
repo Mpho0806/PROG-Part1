@@ -151,43 +151,7 @@ public class RegistrationAndLogIn {
             System.out.println(message.details());
         }
     }
-
-    // ===== PART 3: STORED MESSAGES =====
-    private static void storedMessagesMenu(Scanner input, String username) {
-        System.out.println();
-        System.out.println("a) Display sender and recipient of all stored messages");
-        System.out.println("b) Display the longest stored message");
-        System.out.println("c) Search for a message ID");
-        System.out.println("d) Search for all messages to a recipient");
-        System.out.println("e) Delete a message using its hash");
-        System.out.println("f) Display report of all stored messages");
-        System.out.print("Choose an option: ");
-
-        switch (input.nextLine().trim().toLowerCase()) {
-            case "a":
-                System.out.println(MessageManager.displaySenderAndRecipient(username));
-                break;
-            case "b":
-                System.out.println(MessageManager.longestStoredMessage());
-                break;
-            case "c":
-                System.out.print("Enter message ID: ");
-                System.out.println(MessageManager.searchByMessageId(input.nextLine().trim()));
-                break;
-            case "d":
-                System.out.print("Enter recipient cell number: ");
-                System.out.println(MessageManager.searchByRecipient(input.nextLine().trim()));
-                break;
-            case "e":
-                System.out.print("Enter message hash: ");
-                System.out.println(MessageManager.deleteByHash(input.nextLine().trim()));
-                break;
-            case "f":
-                System.out.println(MessageManager.displayReport());
-                break;
-            default:
-                System.out.println("Invalid option.");
-        }
+    
         // ===== PART 3: STORED MESSAGES =====
     private static void storedMessagesMenu(Scanner input, String username) {
         System.out.println();
