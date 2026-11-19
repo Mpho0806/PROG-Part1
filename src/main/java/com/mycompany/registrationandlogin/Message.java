@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Message {
 
@@ -35,6 +37,14 @@ public class Message {
         this.messageHash = createMessageHash();
     }
 
+        // Used when reading stored messages back from the JSON file (keeps the saved hash)
+    private Message(String messageId, String messageHash, String recipient, String text, boolean fromFile) {
+        this.messageId = messageId;
+        this.messageNumber = 0;
+        this.recipient = recipient;
+        this.text = text;
+        this.messageHash = messageHash;
+    }
     private static String generateId() {
         long n = ThreadLocalRandom.current().nextLong(0, 10_000_000_000L);
         return String.format("%010d", n);
@@ -76,14 +86,16 @@ public class Message {
         return word.replaceAll("[^\\p{L}\\p{N}]", "");
     }
 
-    // 1 = send, 2 = disregard, 3 = store to send later
     public String sentMessage(int choice) {
         switch (choice) {
             case 1:
                 sentMessages.add(this);
+                track(this);
                 totalSent++;
                 return "Message successfully sent.";
             case 2:
+                disregardedMessages.add(this);
+                track(this);
                 return "Press 0 to delete the message.";
             case 3:
                 storeMessage();
@@ -109,9 +121,15 @@ public class Message {
         return totalSent;
     }
 
-    // Store the message in a JSON file (no external library needed)
+       // Store the message in a JSON file (no external library needed)
     public boolean storeMessage() {
         storedMessages.add(this);
+        track(this);
+        return saveStoredMessages();
+    }
+
+    // Writes the whole stored-messages array to the JSON file
+    public static boolean saveStoredMessages() {
         StringBuilder json = new StringBuilder("[\n");
         for (int i = 0; i < storedMessages.size(); i++) {
             Message m = storedMessages.get(i);
@@ -131,6 +149,60 @@ public class Message {
         }
     }
 
+    // Reads the JSON file back into the storedMessages array (call once at start-up)
+    public static void loadStoredMessages() {
+        if (!Files.exists(storageFile)) {
+            return;
+        }
+        try {
+            String json = Files.readString(storageFile);
+            String str = "\"((?:[^\"\\\\]|\\\\.)*)\"";
+            Pattern p = Pattern.compile("\"messageId\":\\s*" + str + ",\\s*\"messageHash\":\\s*" + str
+                    + ",\\s*\"recipient\":\\s*" + str + ",\\s*\"message\":\\s*" + str);
+            Matcher m = p.matcher(json);
+            storedMessages.clear();
+            while (m.find()) {
+                Message loaded = new Message(unescape(m.group(1)), unescape(m.group(2)),
+                        unescape(m.group(3)), unescape(m.group(4)), true);
+                storedMessages.add(loaded);
+                if (!messageIds.contains(loaded.messageId)) {
+                    track(loaded);
+                }
+            }
+        } catch (IOException e) {
+            // nothing stored yet / unreadable file: start with an empty array
+        }
+    }
+
+    private static String unescape(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '\\' && i + 1 < s.length()) {
+                char n = s.charAt(++i);
+                sb.append(n == 'n' ? '\n' : n == 'r' ? '\r' : n == 't' ? '\t' : n);
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    private static void track(Message m) {
+        messageIds.add(m.messageId);
+        messageHashes.add(m.messageHash);
+    }
+
+    // Arrays required by Part 3
+    public static List<Message> getSentMessages() { return sentMessages; }
+    public static List<Message> getDisregardedMessages() { return disregardedMessages; }
+    public static List<Message> getStoredMessages() { return storedMessages; }
+    public static List<String> getMessageHashes() { return messageHashes; }
+    public static List<String> getMessageIds() { return messageIds; 
+    
+    }
+    
+    
     private static String escape(String s) {
         return s.replace("\\", "\\\\").replace("\"", "\\\"")
                 .replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
