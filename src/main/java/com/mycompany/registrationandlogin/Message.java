@@ -14,6 +14,9 @@ public class Message {
     // State shared while the program is running
     private static final List<Message> sentMessages = new ArrayList<>();
     private static final List<Message> storedMessages = new ArrayList<>();
+        private static final List<Message> disregardedMessages = new ArrayList<>();
+    private static final List<String> messageHashes = new ArrayList<>();
+    private static final List<String> messageIds = new ArrayList<>();
     private static int totalSent = 0;
     private static Path storageFile = Path.of("storedMessages.json");
 
@@ -193,7 +196,6 @@ public class Message {
         messageHashes.add(m.messageHash);
     }
 
-    // Arrays required by Part 3
     public static List<Message> getSentMessages() { return sentMessages; }
     public static List<Message> getDisregardedMessages() { return disregardedMessages; }
     public static List<Message> getStoredMessages() { return storedMessages; }
@@ -201,8 +203,7 @@ public class Message {
     public static List<String> getMessageIds() { return messageIds; 
     
     }
-    
-    
+       
     private static String escape(String s) {
         return s.replace("\\", "\\\\").replace("\"", "\\\"")
                 .replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
